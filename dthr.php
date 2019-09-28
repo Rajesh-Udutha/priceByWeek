@@ -195,151 +195,151 @@ if($strStartDate == $strEndDate)
 }
 else
 {
-	 $enddt = date('m/d/Y',strtotime($endDate."1 day"));
-	  $totalAmount = 0;
-	  $period = new DatePeriod(
-		 new DateTime($startDate),
-		 new DateInterval('P1D'),
-		 new DateTime($enddt)
-	  );
-	  $dayArr = array('Sun','Sat');
-	
-		 //$dayArr = array('Sun','Sat');
-		  $weekDayCount = 0;
-		  $weekOffCount = 0;
-		  $weekHoursCount = 0;
-		  $weekendHoursCount = 0;
-		  //print_r($dayArr);
-		  $endingTime = strtotime("11:59:59 PM");
-		  $endingTime = $endingTime + 1;
-		   $startingTime = strtotime("12:00:00 AM");
-	
-	
-	
-	
-	
-	
-	  $startingDay = date('D',strtotime($startDate));
-	  $endingDay = date('D',strtotime($endDate));
-	
-	
-		$weekendStartFlag = 0;
-		$weekendEndFlag = 0;
-	  if($startingDay == 'Fri')
-	  {
-		$weekendStartFlag = 1;
-	  }
-	 
-	  if($endingDay == 'Mon')
-	  {
-		$weekendEndFlag = 1;
-	  }
-	 
-	 
+   $enddt = date('m/d/Y',strtotime($endDate."1 day"));
+    $totalAmount = 0;
+    $period = new DatePeriod(
+     new DateTime($startDate),
+     new DateInterval('P1D'),
+     new DateTime($enddt)
+    );
+    $dayArr = array('Sun','Sat');
+  
+     //$dayArr = array('Sun','Sat');
+      $weekDayCount = 0;
+      $weekOffCount = 0;
+      $weekHoursCount = 0;
+      $weekendHoursCount = 0;
+      //print_r($dayArr);
+      $endingTime = strtotime("11:59:59 PM");
+      $endingTime = $endingTime + 1;
+       $startingTime = strtotime("12:00:00 AM");
+  
+  
+  
+  
+  
+  
+    $startingDay = date('D',strtotime($startDate));
+    $endingDay = date('D',strtotime($endDate));
+  
+  
+    $weekendStartFlag = 0;
+    $weekendEndFlag = 0;
+    if($startingDay == 'Fri')
+    {
+    $weekendStartFlag = 1;
+    }
+   
+    if($endingDay == 'Mon')
+    {
+    $weekendEndFlag = 1;
+    }
+   
+   
   $totCount = iterator_count($period);
   $i = 1;
   foreach ($period as $key => $value) {
     
-	
-	
-		$btwDate = $value->format('m/d/Y');
-		$day = date('D',strtotime($btwDate));
-		if(in_array($day,$dayArr))
-		{
-				$weekOffCount++;
-			if($i == '1')
-			{
-				$timeDiff = $endingTime - strtotime($startTime)	;
-				$weekendHoursCount = $weekendHoursCount+(($timeDiff)/3600);
-			}
-			else
-			{
-				if($i == $totCount)
-				{
-					$endDiff = strtotime($endTime) - $startingTime;
-					$weekendHoursCount = $weekendHoursCount+(($endDiff)/3600);
-				}
-				else
-				{
-					$weekendHoursCount = $weekendHoursCount+24;
-				}
-			}
-		}
-		else{
-			$weekDayCount++;
-			if((($weekendStartFlag == '1')&&($day = 'Fri') )||(($weekendEndFlag == '1')&&($day = 'Mon')))
-			{
-				if(($weekendStartFlag == '1')&&($day = 'Fri') )
-				{
-					$timeDiff = $endingTime - strtotime($startTime)	;
-					$weekendHoursCount =  $weekendHoursCount+(($timeDiff)/3600);
-				}
-				else{
-					$endDiff = strtotime($endTime) - $startingTime;
-					$weekendHoursCount =  $weekendHoursCount+(($endDiff)/3600);
-				}
-			
-					
-			}
-			else{
-			
-				if($i == '1')
-				{
-					
-					$timeDiff = $endingTime - strtotime($startTime)	;
-					$weekHoursCount = $weekHoursCount+(($timeDiff)/3600);	
-				}
-				else
-				{
-					if($i == $totCount)
-					{
-						$endDiff = strtotime($endTime) - $startingTime;
-						$weekHoursCount = $weekHoursCount+(($endDiff)/3600);
-					}
-					else
-					{
-						$weekHoursCount = $weekHoursCount+24;
-					}
-				}
-			
-			}
-		
-			
-		
-		}
-	
-	$i++;
+  
+  
+    $btwDate = $value->format('m/d/Y');
+    $day = date('D',strtotime($btwDate));
+    if(in_array($day,$dayArr))
+    {
+        $weekOffCount++;
+      if($i == '1')
+      {
+        $timeDiff = $endingTime - strtotime($startTime) ;
+        $weekendHoursCount = $weekendHoursCount+(($timeDiff)/3600);
+      }
+      else
+      {
+        if($i == $totCount)
+        {
+          $endDiff = strtotime($endTime) - $startingTime;
+          $weekendHoursCount = $weekendHoursCount+(($endDiff)/3600);
+        }
+        else
+        {
+          $weekendHoursCount = $weekendHoursCount+24;
+        }
+      }
+    }
+    else{
+      $weekDayCount++;
+      if((($weekendStartFlag == '1')&&($day = 'Fri') )||(($weekendEndFlag == '1')&&($day = 'Mon')))
+      {
+        if(($weekendStartFlag == '1')&&($day = 'Fri') )
+        {
+          $timeDiff = $endingTime - strtotime($startTime) ;
+          $weekendHoursCount =  $weekendHoursCount+(($timeDiff)/3600);
+        }
+        else{
+          $endDiff = strtotime($endTime) - $startingTime;
+          $weekendHoursCount =  $weekendHoursCount+(($endDiff)/3600);
+        }
+      
+          
+      }
+      else{
+      
+        if($i == '1')
+        {
+          
+          $timeDiff = $endingTime - strtotime($startTime) ;
+          $weekHoursCount = $weekHoursCount+(($timeDiff)/3600); 
+        }
+        else
+        {
+          if($i == $totCount)
+          {
+            $endDiff = strtotime($endTime) - $startingTime;
+            $weekHoursCount = $weekHoursCount+(($endDiff)/3600);
+          }
+          else
+          {
+            $weekHoursCount = $weekHoursCount+24;
+          }
+        }
+      
+      }
+    
+      
+    
+    }
+  
+  $i++;
   }
-	 
-	 
-}
+   
 
 if($weekHoursCount >= 24)
 {
-	$extrahrs = 24 - $weekHoursCount;
-	$extrahrsAmount = $extrahrs*$weeklyPrice;
-	$weekAmount = $bikePriceData->price+$extrahrsAmount;
+  $extrahrs = 24 - $weekHoursCount;
+  $extrahrsAmount = $extrahrs*$weeklyPrice;
+  $weekAmount = $bikePriceData->price+$extrahrsAmount;
 }
 else{
-$weekAmount = $weekHoursCount*$weeklyPrice;	
+$weekAmount = $weekHoursCount*$weeklyPrice; 
 }
 
 if($weekendHoursCount >= 24)
 {
-	
-	$weekendextrahrs = 24 - $weekendHoursCount;
-	$weekendextrahrsAmount = $weekendextrahrs*$weeklyPrice;
-	$weekEndAmount = $bikePriceData->price+$weekendextrahrsAmount;
-	
+  
+  $weekendextrahrs = 24 - $weekendHoursCount;
+  $weekendextrahrsAmount = $weekendextrahrs*$weeklyPrice;
+  $weekEndAmount = $bikePriceData->price+$weekendextrahrsAmount;
+  
 }
 else{
-	$weekEndAmount = $weekendHoursCount*$weekendPrice;
+  $weekEndAmount = $weekendHoursCount*$weekendPrice;
 }
-	
-	
-	$totalAmount = $weekAmount + $weekEndAmount;
-	
-	
+  
+  
+  $totalAmount = $weekAmount + $weekEndAmount;
+  
+     
+}
+
 //echo $totalAmount."<br>";
   $totalAmount=round($totalAmount);
   //echo $totalAmount."<br>";
@@ -366,3 +366,4 @@ function test($totalAmount){
   }
   
 }
+
