@@ -144,7 +144,7 @@ if(!empty($place))
     // print_r($bikePriceData);exit;
     $weekendPrice = ($bikePriceData->weekendPrice/$bikePriceData->hours);
   //$weeklyHours = 1;
-    $weeklyPrice = ($bikePriceData->price/$bikePriceData->hours);
+    $weeklyPrice = ($bikePriceData->hoursbelowprice/$bikePriceData->hours);
  //$weeklyPrice_decrease = ($bikePriceData->decrease_price/$bikePriceData->decrease_hours);
  //$weekendPrice_decrease = ($bikePriceData->decrease_weekendprice/$bikePriceData->decrease_hours);
  //$weekendHours = 1;
